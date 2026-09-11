@@ -1,0 +1,72 @@
+[
+    {
+        "testCaseName": "asian",
+        "comparison": {
+            "priceDistance": 0.05703362157816538,
+            "stdDevRatio": 0.9987755445642477,
+            "deltaComponentDistance": 0.8522142492790722,
+            "deltaStdDevRatios": 1.0022344808943926,
+            "timeRatio": 1.8625804983876126
+        }
+    },
+    {
+        "testCaseName": "basket_40d",
+        "comparison": {
+            "priceDistance": 1.9951169183211472,
+            "stdDevRatio": 1.0068359348048328,
+            "deltaComponentDistance": 0.9285184323018432,
+            "deltaStdDevRatios": 1.0034436126867194,
+            "timeRatio": 1.2096905962104942
+        }
+    },
+    {
+        "testCaseName": "call",
+        "comparison": {
+            "priceDistance": 0.09517686491719504,
+            "stdDevRatio": 1.0008980625869366,
+            "deltaComponentDistance": 0.8275445347931081,
+            "deltaStdDevRatios": 0.9992689093083604,
+            "timeRatio": 3.9648126672815396
+        }
+    },
+    {
+        "testCaseName": "perf",
+        "comparison": {
+            "priceDistance": 1.2298585045396626,
+            "stdDevRatio": 1.0049866694957663,
+            "deltaComponentDistance": 1.9194758275708212,
+            "deltaStdDevRatios": 1.0050241528070676,
+            "timeRatio": 1.4032978881769052
+        }
+    },
+    {
+        "testCaseName": "basket_2d",
+        "comparison": {
+            "priceDistance": 0.1843841727160783,
+            "stdDevRatio": 0.9966803965445379,
+            "deltaComponentDistance": 1.6491077553178086,
+            "deltaStdDevRatios": 1.0004952085213956,
+            "timeRatio": 2.956824236081608
+        }
+    },
+    {
+        "testCaseName": "basket_5d_1",
+        "comparison": {
+            "priceDistance": 0.6839945979416574,
+            "stdDevRatio": 1.0033282253333715,
+            "deltaComponentDistance": 1.5605913632895283,
+            "deltaStdDevRatios": 1.0015395939028338,
+            "timeRatio": 1.627752174161946
+        }
+    },
+    {
+        "testCaseName": "basket_5d",
+        "comparison": {
+            "priceDistance": 1.3132816254453037,
+            "stdDevRatio": 0.9999599650498717,
+            "deltaComponentDistance": 0.8427457536452838,
+            "deltaStdDevRatios": 1.002777440678806,
+            "timeRatio": 1.609770685552943
+        }
+    }
+]

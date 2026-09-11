@@ -1,0 +1,72 @@
+[
+    {
+        "testCaseName": "basket_2d",
+        "comparison": {
+            "priceDistance": 0.18438417271611718,
+            "stdDevRatio": 0.9966803965445372,
+            "deltaComponentDistance": 1.6491077553322167,
+            "deltaStdDevRatios": 1.0004952085214,
+            "timeRatio": 40.14416967869007
+        }
+    },
+    {
+        "testCaseName": "basket_5d",
+        "comparison": {
+            "priceDistance": 1.313281625445719,
+            "stdDevRatio": 0.999959965049872,
+            "deltaComponentDistance": 0.8427457536647719,
+            "deltaStdDevRatios": 1.0027774406788699,
+            "timeRatio": 17.482641979543253
+        }
+    },
+    {
+        "testCaseName": "perf",
+        "comparison": {
+            "priceDistance": 1.2298585045598835,
+            "stdDevRatio": 1.0049866694958798,
+            "deltaComponentDistance": 1.9194758439634783,
+            "deltaStdDevRatios": 1.0050241528499815,
+            "timeRatio": 6.074075565551048
+        }
+    },
+    {
+        "testCaseName": "basket_5d_1",
+        "comparison": {
+            "priceDistance": 0.6839945979418048,
+            "stdDevRatio": 1.0033282253333715,
+            "deltaComponentDistance": 1.5605913633188737,
+            "deltaStdDevRatios": 1.0015395939028622,
+            "timeRatio": 15.371339694122081
+        }
+    },
+    {
+        "testCaseName": "call",
+        "comparison": {
+            "priceDistance": 0.09517686491720957,
+            "stdDevRatio": 1.0008980625869366,
+            "deltaComponentDistance": 0.8275445347966485,
+            "deltaStdDevRatios": 0.9992689093083573,
+            "timeRatio": 68.08122523678149
+        }
+    },
+    {
+        "testCaseName": "basket_40d",
+        "comparison": {
+            "priceDistance": 1.995116918321477,
+            "stdDevRatio": 1.0068359348048341,
+            "deltaComponentDistance": 0.9285184324493534,
+            "deltaStdDevRatios": 1.0034436126872672,
+            "timeRatio": 6.158859773815794
+        }
+    },
+    {
+        "testCaseName": "asian",
+        "comparison": {
+            "priceDistance": 0.05703362157818669,
+            "stdDevRatio": 0.9987755445642472,
+            "deltaComponentDistance": 0.8522142492874083,
+            "deltaStdDevRatios": 1.0022344808944146,
+            "timeRatio": 8.158748770977628
+        }
+    }
+]
