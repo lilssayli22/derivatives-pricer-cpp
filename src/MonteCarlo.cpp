@@ -56,10 +56,8 @@ std::tuple<double,double> MonteCarlo::price( PnlMat* past, double t) {
     pnl_mat_free(&x);
     return std::make_tuple( result , priceStdev);
 }
- std::tuple<PnlVect*, PnlVect*> MonteCarlo::delta(
-      PnlMat* past,
-      double t
-  ) {
+ std::tuple<PnlVect*, PnlVect*> MonteCarlo::delta(PnlMat* past,double t)
+  {
       const int D = model.D;
 
       PnlVect* sum = pnl_vect_create_from_zero(D);
@@ -69,85 +67,49 @@ std::tuple<double,double> MonteCarlo::price( PnlMat* past, double t) {
       PnlMat* shiftedUp = pnl_mat_new();
       PnlMat* shiftedDown = pnl_mat_new();
 
-      for (int simulationIndex = 0;
-           simulationIndex < M;
-           simulationIndex++) {
+      for (int simulationIndex = 0;simulationIndex < M;simulationIndex++) {
+        model.asset(past,t,option.T,option.N,path,rng);
+        if (option.optionType == "basket") {
 
-          model.asset(
-              past,
-              t,
-              option.T,
-              option.N,
-              path,
-              rng
-          );
+        // valeur du panier a maturite, calculee une seule fois
+        double basket = 0.0;
+        for (int d = 0; d < D; d++)
+            basket += GET(option.lambda, d) * MGET(path, option.N, d);
 
-          /*
-           * On copie la trajectoire seulement deux fois par simulation :
-           * une pour le bump positif, une pour le négatif.
-           */
+        for (int d = 0; d < D; d++) {
+            const double Sd = MGET(path, option.N, d);
+            const double variation = GET(option.lambda, d) * Sd * option.fdStep;
+
+            const double payoffUp   = std::max(0.0, basket + variation - option.Strike);
+            const double payoffDown = std::max(0.0, basket - variation - option.Strike);
+
+            const double spot = MGET(past, past->m - 1, d);
+            const double deltaSample = (payoffUp - payoffDown) / (2.0 * spot * option.fdStep);
+
+            LET(sum, d) += deltaSample;
+            LET(sumSquares, d) += deltaSample * deltaSample;
+        }}
+        else{
           pnl_mat_clone(shiftedUp, path);
           pnl_mat_clone(shiftedDown, path);
 
           for (int d = 0; d < D; d++) {
-              model.shift_asset(
-                  shiftedUp,
-                  path,
-                  d,
-                  option.fdStep,
-                  t,
-                  option.T,
-                  option.N
-              );
+              model.shift_asset(shiftedUp, path,d,option.fdStep,t, option.T,option.N);
 
-              model.shift_asset(
-                  shiftedDown,
-                  path,
-                  d,
-                  -option.fdStep,
-                  t,
-                  option.T,
-                  option.N
-              );
+              model.shift_asset(shiftedDown,path,d,-option.fdStep,t,option.T, option.N);
 
               const double payoffUp = option.payoff(shiftedUp);
               const double payoffDown = option.payoff(shiftedDown);
 
-              const double spot =
-                  MGET(past, past->m - 1, d);
+              const double spot =MGET(past, past->m - 1, d);
 
-              const double deltaSample =
-                  (payoffUp - payoffDown)
-                  / (2.0 * spot * option.fdStep);
+              const double deltaSample =(payoffUp - payoffDown) / (2.0 * spot * option.fdStep);
 
               LET(sum, d) += deltaSample;
               LET(sumSquares, d) += deltaSample * deltaSample;
-
-              /*
-               * Remet la colonne d dans son état original.
-               * Les matrices shiftedUp et shiftedDown sont prêtes
-               * pour l'actif d + 1.
-               */
-              model.shift_asset(
-                  shiftedUp,
-                  path,
-                  d,
-                  0.0,
-                  t,
-                  option.T,
-                  option.N
-              );
-
-              model.shift_asset(
-                  shiftedDown,
-                  path,
-                  d,
-                  0.0,
-                  t,
-                  option.T,
-                  option.N
-              );
-          }
+              model.shift_asset(shiftedUp, path,d,0.0,t, option.T, option.N);
+              model.shift_asset(shiftedDown, path, d, 0.0, t,  option.T,  option.N);
+          }}
       }
 
       const double discount =
